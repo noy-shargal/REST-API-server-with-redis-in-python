@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  messages_redis:
+    image: redis:latest
+    volumes:
+      - ./data:/data
+    ports:
+      - 6379:6379
+  messages_api:
+    build: .
+    command: python run.py
+    volumes:
+      - .:/app
+    ports:
+      - 9000:9000
