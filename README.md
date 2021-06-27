@@ -29,7 +29,7 @@ Build, (re)create, start, and attach to containers for a service. Both Redis and
 containers.
 
 ```
-$ docker-compose up - d
+$ docker-compose up -d
 ```
 
 To list the running containers:
