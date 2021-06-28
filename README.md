@@ -1,7 +1,7 @@
-FastAPI-Redis
+FastAPI-server-with-Redis
 =================
 
-## Installation
+## Installation guide
 
 ### Docker
 
