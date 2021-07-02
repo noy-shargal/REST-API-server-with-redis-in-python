@@ -29,7 +29,7 @@ class TestApp:
         client.post("/api/publish", json={'content': 'message123'})
         response = client.post("/api/publish", json={'content': 'message1234'})
 
-        assert response.status_code == 200
+        assert response.status_code == 201
         assert response.json() == {"success": "new message added"}
 
     def test_api_getlast_1(self):
@@ -46,7 +46,7 @@ class TestApp:
         client.post("/api/publish", json={'content': 'this is a message.'})
         response = client.post("/api/publish", json={'content': 'this is a message.'})
 
-        assert response.status_code == 200
+        assert response.status_code == 201
         assert response.json() == {"success": "new message added"}
 
     def test_api_getlast_2(self):

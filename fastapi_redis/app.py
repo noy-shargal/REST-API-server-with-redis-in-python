@@ -3,6 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 
 from .redis_database import RedisDatabase
 from .models import Message, MessagesList, Date
+from fastapi import FastAPI, Response, status
 
 app = FastAPI()
 
@@ -13,8 +14,8 @@ async def common_parameters():
     return {'db': db}
 
 
-@app.post('/api/publish', tags=['messages'])
-async def post_publish(message: Message, commons: dict = Depends(common_parameters)):
+@app.post('/api/publish', tags=['messages'],  status_code=200)
+async def post_publish(message: Message, response: Response, commons: dict = Depends(common_parameters)):
     """ Add a new message """
 
     try:
@@ -22,7 +23,7 @@ async def post_publish(message: Message, commons: dict = Depends(common_paramete
         redis_database.publish_message(message.content)
     except redis.exceptions.ConnectionError:
         raise HTTPException(status_code=500, detail="could not connect to redis")
-
+    response.status_code = status.HTTP_201_CREATED
     return {"success": "new message added"}
 
 
